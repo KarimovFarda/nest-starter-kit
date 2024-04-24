@@ -3,8 +3,8 @@ import { INestApplication } from "@nestjs/common";
 
 export const setupSwagger = (app: INestApplication): void => {
     const options = new DocumentBuilder()
-        .setTitle('TravelAPITS')
-        .setDescription('TravelAPITS with NestJs')
+        .setTitle('Example')
+        .setDescription('Example with NestJs')
         .setVersion('1.0')
         .setLicense('MIT', 'https://opensource.org/licenses/MIT')
         .addBearerAuth(

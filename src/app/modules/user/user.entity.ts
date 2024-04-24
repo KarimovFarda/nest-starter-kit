@@ -34,6 +34,6 @@ export class UserEntity {
     @Column({ default: false, type: 'boolean' })
     enable2FA: boolean;
 
-    @Column()
+    @Column({ type: 'text' })
     apiKey: string;
 }

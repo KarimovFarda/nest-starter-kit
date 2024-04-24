@@ -1,3 +1,4 @@
+import { DataSource, DataSourceOptions } from "typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import {
     TypeOrmModuleAsyncOptions,
@@ -5,7 +6,7 @@ import {
 } from "@nestjs/typeorm";
 import { UserEntity } from "src/app/modules/user/user.entity";
 import "dotenv/config"
-import { DataSource, DataSourceOptions } from "typeorm";
+
 
 
 //LOAD Environment Variables
@@ -17,7 +18,6 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     useFactory: async (
         configService: ConfigService,
     ): Promise<TypeOrmModuleOptions> => {
-        console.log(configService.get<string>('dbHost'))
         return {
             type: 'postgres',
             host: configService.get<string>('dbHost'),
@@ -27,7 +27,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
             password: configService.get<string>('password'),
             entities: [UserEntity],
             synchronize: false,
-            migrations: ['dist/db/migrations/*.js'],
+            migrations: ['dist/database/migrations/*.js'],
         };
     },
 };
@@ -41,7 +41,7 @@ export const dataSourceOptions: DataSourceOptions = {
     password: process.env.PASSWORD,
     entities: ['dist/**/*.entity.js'], //1
     synchronize: false, // 2
-    migrations: ['dist/db/migrations/*.js'], // 3
+    migrations: ['dist/database/migrations/*.js'], // 3
 };
 
 const dataSource = new DataSource(dataSourceOptions); //4
